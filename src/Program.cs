@@ -14,6 +14,7 @@ namespace ConsoleApp
                     services.AddHostedService<MenuService>();
                     services.AddScoped<IDependency, Dependency>();
                     services.AddSingleton<MinuteJobOption>();
+                    services.AddSingleton<ThirtySecondsJobOption>();
                 })
                 //.UseConsoleLifetime() // This may be used when running inside container. But we dont really run an interative menu program in container.
                 .Build()

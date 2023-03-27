@@ -12,4 +12,12 @@ namespace ConsoleApp
             await Task.Delay(1);
         }
     }
+    class ThirtySecondsJob : IJob
+    {
+        async Task IJob.Execute(IJobExecutionContext context)
+        {
+            Output.WriteLine($"Trigged {nameof(MinuteJob)} at {DateTime.UtcNow}");
+            await Task.Delay(1);
+        }
+    }
 }
