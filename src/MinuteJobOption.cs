@@ -1,8 +1,6 @@
-﻿using EasyConsole;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
-using System;
 using System.Threading.Tasks;
 namespace ConsoleApp
 {
@@ -38,14 +36,6 @@ namespace ConsoleApp
             await scheduler.ScheduleJob(job, trigger);
             
             logger.LogInformation($"Scheduled");
-        }
-    }
-    class MinuteJob : IJob
-    {
-        async Task IJob.Execute(IJobExecutionContext context)
-        {
-            Output.WriteLine($"TRigged {nameof(MinuteJob)} at {DateTime.UtcNow}");
-            await Task.Delay(1);
         }
     }
 }
