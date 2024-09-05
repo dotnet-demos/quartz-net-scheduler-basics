@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using EasyConsole;
+using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
 using System.Threading.Tasks;
@@ -10,16 +11,12 @@ namespace ConsoleApp
         /// Use https://www.javainuse.com/cron to generate and get explanation of CRON expressions
         /// </summary>
         private const string OneMinuteCronExpression = "1 * * ? * *";
-        IDependency dependency;
-        ILogger<MinuteJobOption> logger;
-        public MinuteJobOption(IDependency dep,ILogger<MinuteJobOption> logger)
+        public MinuteJobOption()
         {
-            dependency = dep;
-            this.logger = logger;
         }
         async internal Task Execute()
         {
-            logger.LogTrace($"Start");
+            Output.WriteLine($"Start");
             StdSchedulerFactory factory = new StdSchedulerFactory();
             IScheduler scheduler = await factory.GetScheduler();
             await scheduler.Start();
@@ -31,11 +28,11 @@ namespace ConsoleApp
             ITrigger trigger = TriggerBuilder.Create()
                     .WithIdentity("CleaningTrigger", "CleanGroup")
                     .StartNow()
-                    .WithCronSchedule(OneMinuteCronExpression, x => x.WithMisfireHandlingInstructionFireAndProceed())
+                    .WithCronSchedule(OneMinuteCronExpression, builder => builder.WithMisfireHandlingInstructionFireAndProceed())
                     .Build();
             
             await scheduler.ScheduleJob(job, trigger);
-            logger.LogInformation($"Scheduled");
+             Output.WriteLine($"{nameof(ThirtySecondsJobOption)} - Scheduled job using cron expression {OneMinuteCronExpression}");
         }
     }
 }
