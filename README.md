@@ -9,7 +9,7 @@ This project demo how the Quartz.Net library can be used to schedule function ex
 - Nugets referenced
 	- DotNet.Helpers
 	- easyconsolestd
-	- quartz
+	- [Quartz](https://www.nuget.org/packages/Quartz)
 
 # Dependency injection
 

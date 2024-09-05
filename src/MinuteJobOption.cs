@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 namespace ConsoleApp
 {
@@ -30,9 +31,9 @@ namespace ConsoleApp
                     .StartNow()
                     .WithCronSchedule(OneMinuteCronExpression, builder => builder.WithMisfireHandlingInstructionFireAndProceed())
                     .Build();
-            
+
             await scheduler.ScheduleJob(job, trigger);
-             Output.WriteLine($"{nameof(ThirtySecondsJobOption)} - Scheduled job using cron expression {OneMinuteCronExpression}");
+            Output.WriteLine($"{nameof(ThirtySecondsJobOption)} - Scheduled job using cron expression {OneMinuteCronExpression}");
         }
     }
 }

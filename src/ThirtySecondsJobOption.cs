@@ -6,15 +6,6 @@ namespace ConsoleApp
 {
     class ThirtySecondsJobOption
     {
-        /// <summary>
-        /// Use https://www.javainuse.com/cron to generate and get explanation of CRON expressions
-        /// </summary>
-        private const string OneMinuteCronExpression = "1 * * ? * *";
-
-        public ThirtySecondsJobOption()
-        {
-
-        }
         async internal Task Execute()
         {
             Output.WriteLine($"Start");
@@ -28,6 +19,7 @@ namespace ConsoleApp
 
             ITrigger trigger = TriggerBuilder.Create()
                     .WithIdentity("ThirtySecondsJob")
+                    .WithDescription("This job fires every thirty seconds")
                     .StartNow()
                     .WithSimpleSchedule(scheduleBuilder => scheduleBuilder
                         .WithIntervalInSeconds(30)
