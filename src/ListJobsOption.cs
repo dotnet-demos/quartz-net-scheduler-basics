@@ -3,14 +3,16 @@ using Quartz.Impl;
 using Quartz.Impl.Matchers;
 using System.Collections.Frozen;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using static Quartz.Logging.OperationName;
 namespace ConsoleApp
 {
     class ListJobsOption
     {
         async internal Task Execute()
         {
-            StdSchedulerFactory factory = new StdSchedulerFactory();
+            StdSchedulerFactory factory = new();
             IScheduler scheduler = await factory.GetScheduler();
             var jobs = await scheduler.GetJobGroupNames();
             Logger.WriteInfo("Listing Job Groups and Jobs inside those");
@@ -21,7 +23,7 @@ namespace ConsoleApp
                 jobKeys.ToList().ForEach(async jk =>
                 {
                     var jd = await scheduler.GetJobDetail(jk);
-                    var jts= await scheduler.GetTriggersOfJob(jk);
+                    var jts = await scheduler.GetTriggersOfJob(jk);
                     Logger.WriteInfo($"Job Name: {jk.Name}, JobType: {jd.JobType}. Below are the triggers");
                     jts.ToList().ForEach(jt => Logger.WriteInfo($"Trigger Desc: {jt.Description}, Schedule builder type:{jt.GetScheduleBuilder().GetType()}, Next fire time: {jt.GetNextFireTimeUtc()}"));
                 });

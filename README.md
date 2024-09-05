@@ -2,6 +2,8 @@
 This project demo how the Quartz.Net library can be used to schedule function executions.
 - Using basic schedule of 30 seconds repeated
 - Using cron expression to schedule every minute
+- List all schedules
+- Remove all schedules
 
 # How to run
 - Clone the repo and run using Visual Studio,VS Code or `dotnet` command
