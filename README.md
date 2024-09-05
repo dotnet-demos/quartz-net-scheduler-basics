@@ -1,5 +1,6 @@
 # Basic scheduling using Quartz.Net nuget library 
-This project demo how the Quartz.Net library can be used to schedule function executions.
+This project demo how the Quartz.Net library can be used to schedule function executions. The schedules are kept in process memory.
+
 - Using basic schedule of 30 seconds repeated
 - Using cron expression to schedule every minute
 - List all schedules
